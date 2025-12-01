@@ -33,14 +33,14 @@ contract HelperConfig is Script {
 
     constructor() {
         networkConfigs[11155111] = getSepoliaConfig();
-        
+        networkConfigs[31337] = getOrCreateAnvilEthConfig();
     }
 
     function getConfigByChainId(uint256 chainId) public returns (NetworkConfig memory) {
         if (networkConfigs[chainId].vrfCoordinator != address(0)) {
             return networkConfigs[chainId];
         }else if(chainId == 31337) {
-            // getOrCreateAnvilETHConfig();
+            getOrCreateAnvilEthConfig();
         }
         else {
             revert HelperConfig__InvalidChainId();
@@ -62,7 +62,7 @@ contract HelperConfig is Script {
         });
     }
 
-    function getOrCreateAnvilETHConfig() public returns (NetworkConfig memory) {
+    function getOrCreateAnvilEthConfig() public returns (NetworkConfig memory) {
        //check if we have a config already
         if (localNetworkConfig.vrfCoordinator != address(0)) {
             return localNetworkConfig;
