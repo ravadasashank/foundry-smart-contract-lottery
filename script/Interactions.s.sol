@@ -46,7 +46,7 @@ contract FundSubscription is Script {
         console.log("Chain Id: ", block.chainid);
         if(block.chainid == 31337) {
             vm.startBroadcast();
-            VRFCoordinatorV2_5Mock(vrfCoordinator).fundSubscription(subscriptionId, FUND_AMOUNT);
+            VRFCoordinatorV2_5Mock(vrfCoordinator).fundSubscription(subscriptionId, FUND_AMOUNT * 100);
             vm.stopBroadcast();
         } else {
             console.log("Funding with LINK token");
